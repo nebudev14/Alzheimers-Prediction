@@ -16,5 +16,11 @@ alz_data_nonNA <- alz_data[complete.cases(alz_data), ] # omit all NA values
 # pie chart of all people with some CDR level
 ggplot(alz_data_nonNA, aes(x="", y=nrow(alz_data_nonNA), fill=as.factor(CDR))) + 
   geom_bar(stat="identity", width=1) +
-  coord_polar("y", start=0) 
+  ggtitle("Levels of CDR in all patients") +
+  coord_polar("y", start=0) + 
+  theme_void()
 
+# bar graph of all people with some CDR level
+ggplot(alz_data_nonNA, aes(x = as.factor(CDR))) +
+  geom_bar(width = 0.5) + 
+  ggtitle("Levels of CDR in all patients")
