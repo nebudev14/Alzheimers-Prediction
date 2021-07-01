@@ -24,3 +24,13 @@ ggplot(alz_data_nonNA, aes(x="", y=nrow(alz_data_nonNA), fill=as.factor(CDR))) +
 ggplot(alz_data_nonNA, aes(x = as.factor(CDR))) +
   geom_bar(width = 0.5) + 
   ggtitle("Levels of CDR in all patients")
+
+no_dementia <- alz_data_nonNA[which(alz_data_nonNA$CDR == 0), ] # red
+mild_dementia <- alz_data_nonNA[which(alz_data_nonNA$CDR == 0.5), ] # blue
+moderate_dementia <- alz_data_nonNA[which(alz_data_nonNA$CDR == 1), ] # green
+severe_dementia <- alz_data_nonNA[which(alz_data_nonNA$CDR == 2), ] # orange
+
+boxplot(no_dementia$Age, mild_dementia$Age, moderate_dementia$Age, severe_dementia$Age,
+        xlab = "Age",
+        col = c("red", "blue", "green", "orange"),
+        horizontal=TRUE)
