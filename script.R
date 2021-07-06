@@ -34,3 +34,8 @@ boxplot(no_dementia$Age, mild_dementia$Age, moderate_dementia$Age, severe_dement
         xlab = "Age",
         col = c("red", "blue", "green", "orange"),
         horizontal=TRUE)
+
+boxplot(as.factor(no_dementia$M.F), as.factor(mild_dementia$M.F), as.factor(moderate_dementia$M.F), as.factor(severe_dementia$M.F),
+        xlab = "Sex",
+        col = c("red", "blue", "green", "orange"),
+        horizontal=TRUE)
