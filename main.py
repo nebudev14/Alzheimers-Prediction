@@ -24,6 +24,7 @@ import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.model_selection import cross_val_score
 import seaborn as sns
+import pandas_profiling as pp
 
 data_cross = pd.read_csv('./data/oasis_cross-sectional.csv')
 data_long = pd.read_csv('./data/oasis_longitudinal.csv')
@@ -47,4 +48,16 @@ data_long.drop(columns=['Subject ID', 'MRI ID', 'Group', 'Visit', 'MR Delay'], i
 
 print("----------------new data")
 data = pd.concat([data_cross, data_long])
-print(data.head())
+print(data.describe())
+
+# find correlation between columns in the dataset
+cor = data.corr()
+print("-----------")
+print(cor)
+plt.figure(figsize=(12,9))
+sns.heatmap(cor, xticklabels=cor.columns.values,yticklabels=cor.columns.values, annot=True)
+# plt.show()
+
+# profiling report
+report = pp.ProfileReport(data)
+# report.to_file('profile_report.html')
