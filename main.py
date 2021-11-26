@@ -14,6 +14,7 @@ from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 import scipy
 from sklearn import metrics
+from sklearn.impute import SimpleImputer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
@@ -61,3 +62,16 @@ sns.heatmap(cor, xticklabels=cor.columns.values,yticklabels=cor.columns.values, 
 # profiling report
 report = pp.ProfileReport(data)
 # report.to_file('profile_report.html')
+
+print(data.isna().sum())
+print("------")
+
+# replace SES null values with most occuring element, replace MMSE values with median element
+imputer = SimpleImputer(missing_values=np.nan, strategy='most_frequent')
+imputer.fit(data[['SES']])
+data[['SES']] = imputer.fit_transform(data[['SES']])
+
+# now with median
+imputer = SimpleImputer(missing_values=np.nan, strategy='median')
+imputer.fit(data[['MMSE']])
+data[['MMSE']] = imputer.fit_transform(data[['MMSE']])
